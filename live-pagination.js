@@ -22,7 +22,7 @@
  *  which indicates the request to 'next' page or 'prev' page. It's up to the function goToPage
  *  which must be implemented in the scope what to do with this values. 	
  */
-angular.module('nachinius.live_pagination').directive('livePagination', function() {
+angular.module('nachinius.live_pagination',[]).directive('livePagination', function() {
 	
 	return {
 		restrict: 'E',
@@ -56,7 +56,7 @@ angular.module('nachinius.live_pagination').directive('livePagination', function
 				
 				scope.goToPage = function(command) {
 					scope.howToGoToPage({where: command});
-				}
+				};
 
 				
 				function reactToPaginationChanges() {
@@ -115,24 +115,22 @@ angular.module('nachinius.live_pagination').directive('livePagination', function
 	}
 }); // endirective and module
 
-angular.module('nachinius.live_pagination')
-	.run(["$templateCache",function($templateCache){
-		$templateCache.put('template/livePaginationTemplate.html',
-			"\n"+
-			"<div class=\"pagination_container top\">\n"+
-			"    	<div class=\"pagination\">\n"+
-			"	        <ul>\n"+
-			"	        	<li class=\"prev\" ng-show=\"show.prevPageLink\"><a href=\"\" ng-click=\"goToPage('prev')\">Prev</a></li>\n"+
-			"	        	<li class=\"first\" ng-show=\"show.first\" ng-class=\"{active: (page ==currentPage)}\"><a href=\"\" ng-click=\"goToPage(1)\">1</a></li>\n"+
-			"	        	<li class=\"dots\" ng-show=\"show.dotsToFirst\">...</li>\n"+
-			"	        	<li ng-repeat=\"page in show.displayPages\" ng-class=\"{active: (page == currentPage)}\">\n"+
-			"	        		<a href=\"\" ng-click=\"goToPage(page)\" ng-bind=\"page\"></a>\n"+
-			"	        	</li>\n"+
-			"	        	<li class=\"dots\" ng-show=\"show.dotsToLast\">...</li>\n"+
-			"	        	<li class=\"last\" ng-show=\"show.last\" ng-class=\"{active: (page == currentPage)}\"><a href=\"\" ng-click=\"goToPage(noOfPages)\" ng-bind=\"noOfPages\"></a></li>\n"+
-			"	        	<li class=\"next\" ng-show=\"show.nextPageLink\"><a href=\"\" ng-click=\"goToPage('next')\">Next</a></li>\n"+
-			"	        </ul>\n"+
-			"    	</div>\n"+
-			"</div>\n"+
-			"\n")
-	}])
+angular.module('nachinius.live_pagination').
+	run(["$templateCache",function($templateCache) {
+        $templateCache.put('template/livePaginationTemplate.html',
+            "<div class=\"pagination_container top\">\n" +
+            "    	<div class=\"pagination\">\n" +
+            "	        <ul>\n" +
+            "	        	<li class=\"prev\" ng-show=\"show.prevPageLink\"><a href=\"\" ng-click=\"goToPage('prev')\">Prev</a></li>\n" +
+            "	        	<li class=\"first\" ng-show=\"show.first\" ng-class=\"{active: (page ==currentPage)}\"><a href=\"\" ng-click=\"goToPage(1)\">1</a></li>\n" +
+            "	        	<li class=\"dots\" ng-show=\"show.dotsToFirst\">...</li>\n" +
+            "	        	<li ng-repeat=\"page in show.displayPages\" ng-class=\"{active: (page == currentPage)}\">\n" +
+            "	        		<a href=\"\" ng-click=\"goToPage(page)\" ng-bind=\"page\"></a>\n" +
+            "	        	</li>\n" +
+            "	        	<li class=\"dots\" ng-show=\"show.dotsToLast\">...</li>\n" +
+            "	        	<li class=\"last\" ng-show=\"show.last\" ng-class=\"{active: (page == currentPage)}\"><a href=\"\" ng-click=\"goToPage(noOfPages)\" ng-bind=\"noOfPages\"></a></li>\n" +
+            "	        	<li class=\"next\" ng-show=\"show.nextPageLink\"><a href=\"\" ng-click=\"goToPage('next')\">Next</a></li>\n" +
+            "	        </ul>\n" +
+            "    	</div>\n" +
+            "</div>");
+    }]);
